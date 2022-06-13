@@ -1,0 +1,136 @@
+.cate-image{
+
+    width: 70px;
+    width: 70px;
+   
+}
+
+.form-select{
+
+    display:block;
+    width: 100%;
+    padding: .375rem 2.25rem .375rem .75rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #212529;
+    background-color: #fff;
+    background-repeat: no-repeat;
+    background-position: right .75rem center;
+    background-size: 16px 12px;
+    border: 1px solid #ced4da;
+    border-radius: .25rem;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+}
+
+.dashboard-container{
+
+    height: auto;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-flow: wrap;
+
+}
+
+.dashboard-box1{
+
+    width: 30%;
+    height: 100px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color: rgb(17, 122, 171);
+    border-radius: 3px;
+    position: relative;
+  
+}
+.dashboard-box2{
+
+    width: 30%;
+    height: 100px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color:dimgray;
+    border-radius: 5px;
+    position: relative;
+  
+}
+.dashboard-box3{
+
+    width: 30%;
+    height: 100px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color:rgba(230, 216, 62, 0.971);
+    border-radius: 5px;
+    position: relative;
+  
+}
+.dashboard-box4{
+
+    width: 30%;
+    height: 100px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color: rgb(26, 99, 97);
+    border-radius: 5px;
+    position: relative;
+  
+}
+.dashboard-box5{
+
+    width: 30%;
+    height: 100px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color: rgb(57, 134, 75);
+    border-radius: 5px;
+    position: relative;
+  
+}
+.dashboard-box6{
+
+    width: 30%;
+    height: 100px;
+    margin: 20px;
+    box-sizing: border-box;
+    background-color: rgb(225, 60, 60);
+    border-radius: 5px;
+    position: relative;
+  
+}
+.dash-text{
+
+    color: #fff;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+    position: relative;
+    top: 40%;
+}
+.dash-text3{
+
+    color: black;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 20px;
+    position: relative;
+    top: 40%;
+}
+
+@media screen and (max-width:1200px){
+
+    .dashboard-box{
+        width: 40%;
+    }
+}
+
+@media screen and (max-width:600px){
+
+    .dashboard-box{
+        width: 90%;
+    }
+}
