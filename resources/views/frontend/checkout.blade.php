@@ -23,31 +23,31 @@
                             <div class="row checkout-form">
                                 <div class="col-md-6 mt-3">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" name="fname" value="{{ Auth::user()->fname }}"
+                                    <input type="text" name="fname" value= "@php Auth::check() ? Auth::user()->fname : '' @endphp"
                                         class="form-control firstname " placeholder="Enter First name">
                                     <span class="text-danger" id="firstname_error"></span>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Last Name</label>
-                                    <input type="text" name="lname" value="{{ Auth::user()->lname }}"
+                                    <input type="text" name="lname" value="@php Auth::check() ? Auth::user()->lname : '' @endphp"
                                         class="form-control lastname" placeholder="Enter Last name">
                                     <span class="text-danger" id="lastname_error"></span>
                                 </div>
                                 <div class="col-md-3 mt-3">
                                     <label for="">Email</label>
-                                    <input type="text" name="email" value="{{ Auth::user()->email }}"
+                                    <input type="text" name="email" value="@php Auth::check() ? Auth::user()->email : '' @endphp"
                                         class="form-control email" placeholder="Enter First name">
                                     <span class="text-danger" id="email_error"></span>
                                 </div>
                                 <div class="col-md-3 mt-3">
                                     <label for="f">Phone Number</label>
-                                    <input type="text" name="phone" value="{{ Auth::user()->phone }}"
+                                    <input type="text" name="phone" value="@php Auth::check() ? Auth::user()->phone : '' @endphp"
                                         class="form-control phone" placeholder="Enter First name">
                                     <span class="text-danger" id="phone_error"></span>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="firstName">Address</label>
-                                    <input type="text" name="address" value="{{ Auth::user()->address }}"
+                                    <input type="text" name="address" value="@php Auth::check() ? Auth::user()->address : '' @endphp"
                                         class="form-control address" placeholder="Enter First name">
                                     <span class="text-danger" id="address_error"></span>
                                 </div>
@@ -73,14 +73,14 @@
 
                                         @php $total = 0; @endphp
                                         @php $rand = rand(10,100) @endphp
-                                        @foreach ($cartItems as $item)
+                                        @foreach (session('cart') as $item)
                                             <tr>
-                                                <td> {{ $item->product->name }}</td>
-                                                <td> {{ $item->prod_qty }}</td>
-                                                <td> {{ $item->prod_qty * $item->product->selling_price }}.{{ $rand }}k
+                                                <td> {{ $item['name'] }}</td>
+                                                <td> {{ $item['prod_qty'] }}</td>
+                                                <td> {{ $item['prod_qty'] * $item['selling_price'] }}.{{ $rand }}k
                                                 </td>
                                             </tr>
-                                            @php $total +=  $item->prod_qty*$item->product->selling_price @endphp
+                                            @php $total +=  $item['prod_qty']*$item['selling_price'] @endphp
                                         @endforeach
                                     </tbody>
                                 </table>

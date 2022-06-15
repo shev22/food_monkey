@@ -102,8 +102,8 @@
                             <div class="col-md-10">
                                 <br />
                                 @if ($product->qty > 0)
-                                    <button type="button" class="btn btn-primary me-3 addToCartBtn float-start">Add to Cart
-                                        <i class="fa fa-shopping-cart"></i></button>
+                                    <button type="button" class="btn btn-primary me-3 add_session addToCartBtn float-start">Add to Cart
+                                        <i class="fa fa-shopping-cart" id='25' ></i></button>
                                 @endif
                                 <button type="button" class="btn btn-success me-3 addToWishlistBtn float-start">Add to
                                     Wishlist <i class="fa fa-heart"></i></button>

@@ -4,63 +4,68 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\CategoryController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
+    /*
+    |--------------------------------------------------------------------------
+    | Web Routes
+    |--------------------------------------------------------------------------
+    |
+    | Here is where you can register web routes for your application. These
+    | routes are loaded by the RouteServiceProvider within a group which
+    | contains the "web" middleware group. Now create something great!
+    |
+    */
 
-Route::get('/',  'Frontend\FrontendController@index');
-Route::get('category',  'Frontend\FrontendController@category');
-Route::get('view-category/{slug}',  'Frontend\FrontendController@viewcategory');
-Route::get('category/{cate_slug}/{prod_slug}',  'Frontend\FrontendController@productview');
+    Route::get('/',  'Frontend\FrontendController@index');
+    Route::get('category',  'Frontend\FrontendController@category');
+    Route::get('view-category/{slug}',  'Frontend\FrontendController@viewcategory');
+    Route::get('category/{cate_slug}/{prod_slug}',  'Frontend\FrontendController@productview');
 
-Route::get('/load-cart-data',  'Frontend\CartController@cartCount');
-Route::get('load-wishlist-data',  'Frontend\WishlistController@wishlistCount');
-
-
+    Route::get('/load-cart-data',  'Frontend\CartController@cartCount');
+    Route::get('load-wishlist-data',  'Frontend\WishlistController@wishlistCount');
 
 
 
 
 
 
-Route::post('/add-to-cart',  'Frontend\CartController@addProduct');
-
-Auth::routes();
-
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
+    Route::post('/add-to-cart',  'Frontend\CartController@addProduct');
 
-Route::post('delete-cart-item',  'Frontend\CartController@destroyProduct');
-Route::post('update-cart',  'Frontend\CartController@updateCart');
-Route::post('add-to-wishlist',  'Frontend\WishlistController@add');
-Route::post('delete-wishlist-item',  'Frontend\WishlistController@destroy');
+    Auth::routes();
 
-
-Route::post('delete-wishlist-item',  'Frontend\WishlistController@destroy');
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 
 
+    Route::post('delete-cart-item',  'Frontend\CartController@destroyProduct');
+    Route::post('update-cart',  'Frontend\CartController@updateCart');
+    Route::post('add-to-wishlist',  'Frontend\WishlistController@add');
+    Route::post('delete-wishlist-item',  'Frontend\WishlistController@destroy');
 
 
-Route::get('product-list',  'Frontend\FrontendController@productListAjax');
-Route::post('search-product',  'Frontend\FrontendController@searchProduct');
+    Route::post('delete-wishlist-item',  'Frontend\WishlistController@destroy');
 
+
+
+
+
+    Route::get('product-list',  'Frontend\FrontendController@productListAjax');
+    Route::post('search-product',  'Frontend\FrontendController@searchProduct');
+
+    Route::post("add-to-session",  'Frontend\CartController@addSession');
+    Route::get("view-cart",  'Frontend\CartController@viewSessionCart');
+    Route::post("delete-session-item",  'Frontend\CartController@deleteSessionCart');
+  
+    Route::get('checkout',  'Frontend\CheckoutController@index');
+    Route::post(' place-order',  'Frontend\CheckoutController@placeOrder');
 
 
 
 Route::middleware(['auth'])->group(function() {
 
     Route::get('cart',  'Frontend\CartController@viewCart');
-    Route::get('checkout',  'Frontend\CheckoutController@index');
-    Route::post(' place-order',  'Frontend\CheckoutController@placeOrder');
+    
 
     Route::get('my-orders',  'Frontend\UserController@index');
     Route::get('view-order/{id}',  'Frontend\UserController@view');

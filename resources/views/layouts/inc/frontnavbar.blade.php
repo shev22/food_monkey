@@ -32,6 +32,7 @@
                     <a class="nav-link" href="{{ url('category') }}">Category</a>
                 </li>
 
+
                 @if(Auth::check())
                 <li class="nav-item">
 
@@ -50,9 +51,18 @@
                     </a>
                 </li>
                 @else
+              
+                <li class="nav-item">
+                    @php
+                        $count='';
+                        session('cart') ? $count =count((session('cart'))) : $count =0;
+                        
+                    @endphp
+                    <a class="nav-link" href="{{ url('view-cart') }}">Cart<i class="fa fa-shopping-cart"></i>
+                        <span class="badge badge-pill bg-danger cart_count">{{ $count }}</span>
+                    </a>
+                </li>
                 @endif
-
-
                 @guest
                     @if (Route::has('login'))
                         <li class="nav-item">

@@ -8,7 +8,7 @@
 @include('layouts.inc.slider')
     
         <div class="py-3">
-            <div class="container product_data">
+            <div class="container ">
                 <div class="row">
                     <h3>Featured Products</h3>
                     <div class="owl-carousel featured-carousel owl-theme">
@@ -21,9 +21,9 @@
                                   
                                     </div>
                                    
-                                    <div class="cart">
-  
-                                        <button type="button" class="btn w-100 btn-warning btn-sm  addIndex" id="{{ $prod->id }}">Add to Cart
+                                    <div class="cart product_data">
+                                        <input type="hidden" value="{{ $prod->id }}" class="prod_id">
+                                        <button type="button" class="btn w-100 btn-warning btn-sm add_session addIndex" id="{{ $prod->id }}">Add to Cart
                                             <i class="fa fa-shopping-cart"></i></button>
                                     </div>
                                 </div>

@@ -238,4 +238,62 @@ $(document).ready(function () {
 
     })
 
+    $(document).on("click", ".add_session", function (e) {
+
+
+        var product_id = $(this).closest('.product_data').find(".prod_id").val();
+        var product_qty = 1
+       
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "/add-to-session",
+            data: {
+                'product_id': product_id,
+                'product_qty': product_qty,
+            },
+            success: function (response) {
+                
+                swal(response.status)
+                $('.cart_count').html(response.cart_count)
+            }
+
+        })
+
+    })
+
+    $(document).on("click", '.delete-session-item', function (e) {
+
+        var product_id = $(this).closest('.product_data').find(".prod_id").val();
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        $.ajax({
+            method: "POST",
+            url: "delete-session-item",
+            data: {
+                'product_id': product_id,
+
+            },
+            success: function (response) {
+                loadcart()
+                $('.cart_count').text(response.cart_count);
+                $('.delete'+ product_id ).remove();
+               
+                swal("", response.status, "success")
+            }
+
+        })
+
+     });
+
 });
