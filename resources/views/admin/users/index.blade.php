@@ -29,8 +29,8 @@
                         <a href="{{url('view-users/'.$item->id)}}" class="btn btn-primary btn-sm">View User</a>
                     </td>
                     <td>
-                        <a href="{{url('edit-product/'. $item ->id)}}" class="btn btn-primary btn-sm">Edit</a>
-                        <a href="{{url('delete-product/'. $item ->id)}}" class="btn btn-danger btn-sm">Delete</a>
+                        <a href="" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="" class="btn btn-danger btn-sm">Delete</a>
                       
                     </td>
                    

@@ -65,7 +65,6 @@ use App\Http\Controllers\Admin\CategoryController;
 Route::middleware(['auth'])->group(function() {
 
     Route::get('cart',  'Frontend\CartController@viewCart');
-    
 
     Route::get('my-orders',  'Frontend\UserController@index');
     Route::get('view-order/{id}',  'Frontend\UserController@view');

@@ -48,7 +48,7 @@
                         </div>
                         @php $total += $item['selling_price']* $item['prod_qty']; @endphp 
                         {{-- @else --}}
-                        <h6 class="badge bg-danger">Out of Stock</h6>
+                        <h6 class="badge bg-success">In Stock</h6>
                         {{-- @endif --}}
                     </div>
                     <div class="col-md-2 my-auto">

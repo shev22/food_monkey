@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="login-background h-100">
+<div class="main-container">
 <div class="container mt-5">
     <div class="row justify-content-center">
         <div class="col-md-8">

@@ -27,7 +27,7 @@
                                             ₦{{ $prod->selling_price }}.{{ rand(10, 99) }}k</span></h6>
                                     <br>
                                     <p class="category-text">
-                                        {{ $prod->small_description }}
+                                        {{ $prod->meta_description }}
                                     </p>
                                 </div>
 
@@ -38,4 +38,26 @@
             </div>
         </div>
     </div>
+
+    
+    <!--floating cart-->
+    @if (Auth::check())
+        @php
+            $count = App\Models\Cart::where('user_id', Auth::id())->count();
+            $count_wish = App\Models\Wishlist::where('user_id', Auth::id())->count();
+        @endphp
+        <a class="nav-link float-button" href="{{ url('cart') }}"><i class="fa fa-shopping-cart"></i>
+            <span class="badge badge-pill bg-danger cart-count">{{ $count }}</span>
+        </a>
+    @else
+        @php
+            $count='';
+            session('cart') ? ($count = count(session('cart'))) : ($count = 0);
+            
+        @endphp
+        <a class="nav-link float-button" href="{{ url('view-cart') }}"><i class="fa fa-shopping-cart"></i>
+            <span class="badge badge-pill bg-danger cart_count">{{ $count }}</span>
+        </a>
+    @endif
+ <!--floating cart-->
 @endsection

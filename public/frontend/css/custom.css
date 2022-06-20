@@ -87,6 +87,23 @@ margin-left: 5%;
   font-size: 15px;
   
 }
+
+.main-container{
+
+background-color: rgb(206, 206, 206);
+height: 100%;
+
+}
+
+.float-button{
+
+  
+  position: fixed;
+  right: 20px;
+  bottom: 40%;
+
+
+}
 /* End of Star Rating */
 
 

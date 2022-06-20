@@ -12,97 +12,96 @@ class CategoryController extends Controller
 {
     function index()
     {
-        $category =  Category::all();
+        $category = Category::all();
 
         return view('admin.category.index', compact('category'));
     }
 
     public function add()
-   {
+    {
         return view('admin.category.add');
-   }
+    }
 
-   public function  insert(Request $request)
-   {
-
+    public function insert(Request $request)
+    {
         $category = new Category();
-        if($request ->hasFile('image'))
-        {
+        if ($request->hasFile('image')) {
             $file = $request->file('image');
             $ext = $file->getClientOriginalExtension();
-            $filename = time().'.'.$ext;
-            $file->move('assets/uploads/category',$filename);
+            $filename = time() . '.' . $ext;
+            $file->move('assets/uploads/category', $filename);
             $category->image = $filename;
         }
 
-        $category ->name = $request ->input('name');
-        $category ->slug = $request ->input('slug');
-        $category ->description = $request ->input('description');
-        $category ->status = $request ->input('status')==TRUE ? '1':'0';
-        $category ->popular = $request ->input('popular')==TRUE ? '1':'0';
-        $category ->meta_title = $request ->input('meta_title');
-        $category ->meta_descrip = $request ->input('meta_descrip');
-        $category ->meta_keywords = $request ->input('meta_keywords');
-        
-        $category ->save();
+        $category->name = $request->input('name');
+        $category->slug = $request->input('slug');
+        $category->description = $request->input('description');
+        $category->status = $request->input('status') == true ? '1' : '0';
+        $category->popular = $request->input('popular') == true ? '1' : '0';
+        $category->meta_title = $request->input('meta_title');
+        $category->meta_descrip = $request->input('meta_descrip');
+        $category->meta_keywords = $request->input('meta_keywords');
 
-        return redirect('/dashboard')->with('status', 'category added successfully');
-   }
+        $category->save();
 
-
-   public function edit($id)
-   {
-       $category =  Category::find($id);
-       return view('admin.category.edit', compact('category'));
-   }
-
-   public function update(Request $request, $id)
-   {
-
-    $category =  Category::find($id);
-    if($request->hasFile('image'))
-    {
-        $path = "assests/uploads/category/".$category->image;
-        if(File::exists($path))
-        {
-            File::delete($path);
-        }
-        
-        $file = $request->file('image');
-        $ext = $file->getClientOriginalExtension();
-        $filename = time().'.'.$ext;
-        $file->move('assets/uploads/category',$filename);
-        $category->image = $filename;
+        return redirect('/dashboard')->with(
+            'status',
+            'category added successfully'
+        );
     }
 
-    $category ->name = $request ->input('name');
-    $category ->slug = $request ->input('slug');
-    $category ->description = $request ->input('description');
-    $category ->status = $request ->input('status')==TRUE ? '1':'0';
-    $category ->popular = $request ->input('popular')==TRUE ? '1':'0';
-    $category ->meta_title = $request ->input('meta_title');
-    $category ->meta_descrip = $request ->input('meta_descrip');
-    $category ->meta_keywords = $request ->input('meta_keywords');
-    
-    $category ->update();
-
-    return redirect('/dashboard')->with('status', 'category updated successfuly');
-   }
-
-public function destroy($id)
-{
-    $category =  Category::find($id);
-    if($category->image)
+    public function edit($id)
     {
-        $path = "assests/uploads/category/".$category->image;
-        if(File::exists($path))
-        {
-            File::delete($path);
-        }
+        $category = Category::find($id);
+        return view('admin.category.edit', compact('category'));
     }
-    $category->delete();
-    return redirect('categories')->with('status', 'category deleted successfuly');
-}
 
+    public function update(Request $request, $id)
+    {
+        $category = Category::find($id);
+        if ($request->hasFile('image')) {
+            $path = 'assests/uploads/category/' . $category->image;
+            if (File::exists($path)) {
+                File::delete($path);
+            }
 
+            $file = $request->file('image');
+            $ext = $file->getClientOriginalExtension();
+            $filename = time() . '.' . $ext;
+            $file->move('assets/uploads/category', $filename);
+            $category->image = $filename;
+        }
+
+        $category->name = $request->input('name');
+        $category->slug = $request->input('slug');
+        $category->description = $request->input('description');
+        $category->status = $request->input('status') == true ? '1' : '0';
+        $category->popular = $request->input('popular') == true ? '1' : '0';
+        $category->meta_title = $request->input('meta_title');
+        $category->meta_descrip = $request->input('meta_descrip');
+        $category->meta_keywords = $request->input('meta_keywords');
+
+        $category->update();
+
+        return redirect('/dashboard')->with(
+            'status',
+            'category updated successfuly'
+        );
+    }
+
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        if ($category->image) {
+            $path = 'assests/uploads/category/' . $category->image;
+            if (File::exists($path)) {
+                File::delete($path);
+            }
+        }
+        $category->delete();
+        return redirect('categories')->with(
+            'status',
+            'category deleted successfuly'
+        );
+    }
 }

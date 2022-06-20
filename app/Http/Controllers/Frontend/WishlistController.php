@@ -18,41 +18,45 @@ class WishlistController extends Controller
 
     public function add(Request $request)
     {
-        if(Auth::check())
-        {   
-            $prod_id = $request ->input('product_id');
-            if(Product::find($prod_id))
-            {
+        if (Auth::check()) {
+            $prod_id = $request->input('product_id');
+            if (Product::find($prod_id)) {
                 $wishlist = new Wishlist();
-                $wishlist -> prod_id = $prod_id;
-                $wishlist -> user_id = Auth::id();
-                $wishlist -> save();
+                $wishlist->prod_id = $prod_id;
+                $wishlist->user_id = Auth::id();
+                $wishlist->save();
 
-                return response()->json(['status' => "Product added to Wishlist"]);
-
-            }else{
-                return response()->json(['status' => "Product not found"]);
+                return response()->json([
+                    'status' => 'Product added to Wishlist',
+                ]);
+            } else {
+                return response()->json(['status' => 'Product not found']);
             }
-        }else{
-            return response()->json(['status' => "login to continue"]);
+        } else {
+            return response()->json(['status' => 'login to continue']);
         }
     }
-
 
     public function destroy(Request $request)
     {
         if (Auth::check()) {
             $prod_id = $request->input('prod_id');
-            if (Wishlist::where('prod_id', $prod_id)->where('user_id', Auth::id())->exists())
-             {
-                $item = Wishlist::where('prod_id', $prod_id)->where('user_id', Auth::id())->first();
+            if (
+                Wishlist::where('prod_id', $prod_id)
+                    ->where('user_id', Auth::id())
+                    ->exists()
+            ) {
+                $item = Wishlist::where('prod_id', $prod_id)
+                    ->where('user_id', Auth::id())
+                    ->first();
                 $item->delete();
-                return response()->json(['status' => "Product deleted successfully"]);
+                return response()->json([
+                    'status' => 'Product deleted successfully',
+                ]);
             }
         } else {
-            return response()->json(['status' => "login to continue"]);
+            return response()->json(['status' => 'login to continue']);
         }
-
     }
 
     public function wishlistCount()
@@ -60,6 +64,5 @@ class WishlistController extends Controller
         $wishcount = Wishlist::where('user_id', Auth::id())->count();
 
         return response()->json(['count' => $wishcount]);
- 
     }
 }

@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {   
-      public $cart_product_id;
+     private  $cart_product_id;
 
 
     public function addProduct(Request $request)
@@ -116,7 +116,9 @@ class CartController extends Controller
 
     public function addSession(Request $request)
     {
-          $this->cart_product_id = $request->input('product_id');
+           $this->cart_product_id = $request->input('product_id');
+        
+
 
         if (!Auth::check()) {
 
@@ -181,7 +183,7 @@ class CartController extends Controller
         //  $products =  Product::where('id', $this->cart_product_id)->first();
         //  $category =  Category::where('id',$this->cart_product_id)->first();
 
-        // die(var_dump( $this->cart_product_id));
+         die(var_dump( $this->cart_product_id));
 
             return view('frontend.session_cart');
         

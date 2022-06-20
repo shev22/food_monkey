@@ -19,7 +19,5 @@ class DashboardController extends Controller
     {
         $users = User::find($id);
         return view('admin.users.view', compact('users'));
-
     }
-
 }
