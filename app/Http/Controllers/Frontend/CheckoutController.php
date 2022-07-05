@@ -43,7 +43,7 @@ class CheckoutController extends Controller
         }
 
         $order = new Order();
-        $order->user_id = Auth::id();
+        $order->user_id = Auth::id() ?? '';
         $order->fname = $request->input('fname');
         $order->lname = $request->input('lname');
         $order->email = $request->input('email');
@@ -69,14 +69,16 @@ class CheckoutController extends Controller
             $prod->update();
         }
 
-        if (Auth::user()->address == null) {
-            $user = User::where('id', Auth::id())->first();
-            $user->fname = $request->input('fname');
-            $user->lname = $request->input('lname');
-            $user->phone = $request->input('phone');
-            $user->address = $request->input('address');
-            $user->address = $request->input('address');
-            $user->update();
+        if (Auth::check()) {
+            if (Auth::user()->address == null) {
+                $user = User::where('id', Auth::id())->first();
+                $user->fname = $request->input('fname');
+                $user->lname = $request->input('lname');
+                $user->phone = $request->input('phone');
+                $user->address = $request->input('address');
+                $user->address = $request->input('address');
+                $user->update();
+            }
         }
 
         $cartItems = Cart::where('user_id', Auth::id())->get();

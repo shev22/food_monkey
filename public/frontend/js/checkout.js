@@ -110,9 +110,9 @@ $(document).ready(function () {
 
                                 },
 
-                                success: function (responserazorb) {
+                                success: function (responserazorpay) {
 
-                                    swal(responserazorb.status).then((value) => {
+                                    swal(responserazorpay.status).then((value) => {
                                         window.location.href = "/my-orders";
                                     });
 

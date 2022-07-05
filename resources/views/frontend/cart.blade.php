@@ -59,7 +59,9 @@
             <div class="card-footer ">
                 <h6>
                     Total Price : ₦{{$total}}.{{rand(10,100)}}k
-                    <a href="{{url('checkout')}}" class="btn btn-outline-success px-5 float-end ">Proceed to Checkout</a>
+               
+                       <a href="{{url('checkout')}}" class="btn btn-outline-success px-5 float-end ">Proceed to Checkout</a>   
+ 
                 </h6>
             </div>
             @else

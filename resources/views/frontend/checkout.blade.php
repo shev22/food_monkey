@@ -23,25 +23,25 @@
                             <div class="row checkout-form">
                                 <div class="col-md-6 mt-3">
                                     <label for="firstName">First Name</label>
-                                    <input type="text" name="fname" value= "@php Auth::check() ? Auth::user()->fname : '' @endphp"
-                                        class="form-control firstname " placeholder="Enter First name">
+                                    <input type="text" name="fname" required value= "@php Auth::check() ? Auth::user()->fname : '' @endphp"
+                                        class="form-control firstname " required placeholder="Enter First name">
                                     <span class="text-danger" id="firstname_error"></span>
                                 </div>
                                 <div class="col-md-6 mt-3">
                                     <label for="">Last Name</label>
-                                    <input type="text" name="lname" value="@php Auth::check() ? Auth::user()->lname : '' @endphp"
+                                    <input type="text" name="lname" required value="@php Auth::check() ? Auth::user()->lname : '' @endphp"
                                         class="form-control lastname" placeholder="Enter Last name">
                                     <span class="text-danger" id="lastname_error"></span>
                                 </div>
                                 <div class="col-md-3 mt-3">
                                     <label for="">Email</label>
-                                    <input type="text" name="email" value="@php Auth::check() ? Auth::user()->email : '' @endphp"
+                                    <input type="text" name="email" required value="@php Auth::check() ? Auth::user()->email : '' @endphp"
                                         class="form-control email" placeholder="Enter First name">
                                     <span class="text-danger" id="email_error"></span>
                                 </div>
                                 <div class="col-md-3 mt-3">
                                     <label for="f">Phone Number</label>
-                                    <input type="text" name="phone" value="@php Auth::check() ? Auth::user()->phone : '' @endphp"
+                                    <input type="text" name="phone" required value="@php Auth::check() ? Auth::user()->phone : '' @endphp"
                                         class="form-control phone" placeholder="Enter First name">
                                     <span class="text-danger" id="phone_error"></span>
                                 </div>
@@ -60,7 +60,50 @@
                         <div class="card-body">
                             <h6>Order Details</h6>
                             <hr>
-                            {{-- @if ($cartItems->count() > 0) --}}
+                            @if(Auth::check())
+                            @if ($cartItems->count() > 0) 
+                                <table class="table table-striped table-bodered">
+                                    <tbody>
+                                        <thead>
+                                            <tr>
+                                                <th>Name</th>
+                                                <th>Qty</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+
+                                        @php $total = 0; @endphp
+                                        @php $rand = rand(10,100) @endphp
+                                        @foreach ($cartItems as $item)
+                                            <tr>
+                                                <td> {{ $item->product->name }}</td>
+                                                <td> {{ $item->prod_qty }}</td>
+                                                <td> {{ $item->prod_qty * $item->product->selling_price }}.{{ $rand }}k
+                                                </td>
+                                            </tr>
+                                            @php $total +=  $item->prod_qty * $item->product->selling_price  @endphp
+                                        @endforeach
+                                    </tbody>
+                                </table>
+
+
+                                <h6 class="px-2">Total Price :
+                                    <span class="float-end px-4"> ₦{{ $total }}.{{ $rand }}K
+                                    </span>
+                                </h6>
+                                <hr>
+                                <input type="hidden" name="payment_mode" value="COD">
+                                <button type="submit" class="btn btn-success w-100 ">Place order | COD</button>
+                                <button type="button" class="btn btn-primary w-100 mt-2  razorpay_btn">Pay with
+                                    Razorpay</button>
+                                <div class="mt-2 " id="paypal-button-container"></div>
+                            @else
+                                <h4 class="text-center"> No products in cart</h4>
+                            @endif
+
+                            @elseif(session('cart'))
+                            
+                            @if (count(session('cart')) > 0) 
                                 <table class="table table-striped table-bodered">
                                     <tbody>
                                         <thead>
@@ -96,9 +139,10 @@
                                 <button type="button" class="btn btn-primary w-100 mt-2  razorpay_btn">Pay with
                                     Razorpay</button>
                                 <div class="mt-2 " id="paypal-button-container"></div>
-                            {{-- @else
+                            @else
                                 <h4 class="text-center"> No products in cart</h4>
-                            @endif --}}
+                            @endif
+                            @endif
                         </div>
                     </div>
                 </div>

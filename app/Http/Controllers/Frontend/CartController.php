@@ -10,9 +10,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
-{   
-     private  $cart_product_id;
-
+{
+    private $cart_product_id;
 
     public function addProduct(Request $request)
     {
@@ -46,7 +45,7 @@ class CartController extends Controller
                     ]);
                 }
             }
-        } 
+        }
     }
 
     public function viewCart()
@@ -96,12 +95,12 @@ class CartController extends Controller
                 $cart->update();
                 return response()->json(['status' => 'Quantity updated']);
             }
-        }else{
+        } else {
             $cart = session('cart');
-           //$price =  $request ->input('price');
-           $cart [$prod_id]['prod_qty'] = (int)  $product_qty;
-           
-           session()->put('cart', $cart);
+            //$price =  $request ->input('price');
+            $cart[$prod_id]['prod_qty'] = (int) $product_qty;
+
+            session()->put('cart', $cart);
         }
     }
 
@@ -112,21 +111,12 @@ class CartController extends Controller
         return response()->json(['count' => $cartcount]);
     }
 
-
-
     public function addSession(Request $request)
     {
-           $this->cart_product_id = $request->input('product_id');
-        
-
-
         if (!Auth::check()) {
-
-            
             $product_id = $request->input('product_id');
             $product_qty = $request->input('product_qty');
 
-          
             $prod_check = Product::where('id', $product_id)->first();
             $cat_check = Category::where('id', $product_id)->first();
             $cart = session()->get('cart', []);
@@ -164,7 +154,6 @@ class CartController extends Controller
                     'prod_qty' => $product_qty,
                     'selling_price' => $prod_check->selling_price,
                     'image' => $prod_check->image,
-                   
                 ];
                 session()->put('cart', $cart);
 
@@ -180,13 +169,7 @@ class CartController extends Controller
 
     public function viewSessionCart()
     {
-        //  $products =  Product::where('id', $this->cart_product_id)->first();
-        //  $category =  Category::where('id',$this->cart_product_id)->first();
-
-         die(var_dump( $this->cart_product_id));
-
-            return view('frontend.session_cart');
-        
+        return view('frontend.session_cart');
     }
 
     public function deleteSessionCart(Request $request)
@@ -204,9 +187,6 @@ class CartController extends Controller
             ];
 
             return response()->json($response);
-
         }
-
     }
-    }
-
+}
